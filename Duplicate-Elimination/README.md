@@ -8,4 +8,4 @@ Number of Buffers: N
 Type of index 1-hash 2-B-Tree
 
 ## Running the Code
-invoke python Runner.py and give the input as above
+invoke ```python Runner.py``` and give the input as above
