@@ -3,14 +3,13 @@ import sys
 from Btree import Btree
 from Hashing import MyHashStore
 
-
 def openFile(relation_name):
     """Opens the file and sets up the iterator
     :param relation_name: name of the csv file having data`
     :return: returns file descriptors to input and output files
     """
     try:
-        fd = open(relation_name + '.csv', 'rb')
+        fd = open(relation_name, 'rb')
         output = open('result.csv', 'w')
         return fd, output
     except IOError:
@@ -126,7 +125,7 @@ if __name__ == "__main__":
     n = int(raw_input("Number of Buffers: "))
     index_type = int(raw_input("Do you want hash or B-Tree\n1-hash 2-B-Tree: "))
     index = "B-Tree"
-    p = len(open(file_name + '.csv', 'r').readline().strip().split(','))  # Get the Size of the record
+    p = len(open(file_name, 'r').readline().strip().split(','))  # Get the Size of the record
     buffer_length = s / p * 4  # Assuming 32 bit integers
     t = max(s / (16 + 8 * p), 3)
     # noinspection PyGlobalUndefined
