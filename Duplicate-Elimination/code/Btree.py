@@ -1,3 +1,6 @@
+import sys
+
+
 class Btree:
     """Class to Handle the whole Btree"""
 
@@ -96,7 +99,7 @@ class Node:
         while i < self.n:
             if not self.leaf:
                 self.children[i].traverse()
-            print self.keys[i]
+            print(self.keys[i])
             i += 1
         if not self.leaf:
             self.children[i].traverse()
@@ -124,6 +127,7 @@ class Node:
         :param child: child which is to be split
         """
         # Make the new child
+        sys.stderr.write("Splitting a Node\n")
         new_child = Node(child.t, child.leaf)
         # Copy the old keys to New one
         for i in range(self.t - 1):
