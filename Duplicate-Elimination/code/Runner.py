@@ -33,21 +33,21 @@ def get_next(fd, store, input_buffers, buffer_size):
     while True:
         current_record = fd.readline().strip()
         if len(current_record) == 0:
-            sys.stderr.write("Reached End. Processing Now\n")
+            #sys.stderr.write("Reached End. Processing Now\n")
             do_process(store, input_buffers)
             break
         if len(input_buffers[current]) == buffer_size:
             prev_current = current
             current += 1
-            sys.stderr.write("Current changed from: " + str(prev_current) + " to " + str(current) + "\n")
+            #sys.stderr.write("Current changed from: " + str(prev_current) + " to " + str(current) + "\n")
         # Check whether the buffers are full
         if (current == len(input_buffers) - 1
             and len(input_buffers[current]) == buffer_size - 1):
             input_buffers[current].append(current_record)
-            sys.stderr.write("Reached limit. Processing Now\n")
+            #sys.stderr.write("Reached limit. Processing Now\n")
             do_process(store, input_buffers)
             global total
-            sys.stderr.write("Processing Done. Total so_far is " + str(total) + "\n")
+            #sys.stderr.write("Processing Done. Total so_far is " + str(total) + "\n")
             continue
             # DO the processing and return
         else:
@@ -75,7 +75,7 @@ def do_process(store, input_buffers):
         for j in input_buffers[buffer_index]:
             done += 1
             if done - prev_done == 10000:
-                sys.stderr.write("Done so far:" + str(done) + "\n")
+               # sys.stderr.write("Done so far:" + str(done) + "\n")
                 prev_done = done
             if not store.search(j):
                 store.insert(j)
@@ -112,11 +112,11 @@ if __name__ == "__main__":
     s = int(args[2])
     index_type = int(args[3])
     index = "B-Tree"
-    p = len(open(file_name, 'r').readline().strip().split(','))  # Get the Size of the record
-    buffer_length = int(s / p * 4)  # Assuming 32 bit integers
-    t = int(max(s / (16 + 8 * p), 3))
-    sys.stderr.write("Taken t as:" + str(t) + "\n")
-    sys.stderr.write("Taken buffer_len as:" + str(buffer_length) + "\n")
+    p = len(open(file_name, 'r').readline().strip().split(',')) * 8  # Get the Size of the record
+    buffer_length = int(s / p)  # Assuming 32 bit integers
+    t = int(max(s / (2 * p + p), 3))
+    #sys.stderr.write("Taken t as:" + str(t) + "\n")
+    #sys.stderr.write("Taken buffer_len as:" + str(buffer_length) + "\n")
     global LIM, cnt
     cnt = 0
     LIM = 10000 - 100  # Safety

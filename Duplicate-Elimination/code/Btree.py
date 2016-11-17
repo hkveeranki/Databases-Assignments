@@ -127,7 +127,7 @@ class Node:
         :param child: child which is to be split
         """
         # Make the new child
-        sys.stderr.write("Splitting a Node\n")
+        # sys.stderr.write("Splitting a Node\n")
         new_child = Node(child.t, child.leaf)
         # Copy the old keys to New one
         for i in range(self.t - 1):
